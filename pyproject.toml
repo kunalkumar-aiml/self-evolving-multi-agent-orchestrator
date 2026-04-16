@@ -8,12 +8,27 @@ version = "0.1.0"
 description = "Local-first self-evolving multi-agent code orchestration runtime"
 readme = "README.md"
 requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Kunal Kumar" }
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
 dependencies = [
   "langgraph>=0.2.0",
   "langchain-core>=0.3.0",
   "pydantic>=2.7.0",
   "pytest>=8.3.0"
 ]
+
+[project.urls]
+Homepage = "https://github.com/kunalkumar-aiml/self-evolving-multi-agent-orchestrator"
+Repository = "https://github.com/kunalkumar-aiml/self-evolving-multi-agent-orchestrator"
+Issues = "https://github.com/kunalkumar-aiml/self-evolving-multi-agent-orchestrator/issues"
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
