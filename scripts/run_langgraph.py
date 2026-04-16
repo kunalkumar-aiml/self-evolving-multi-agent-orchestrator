@@ -13,6 +13,23 @@ if str(PROJECT_ROOT) not in sys.path:
 from orchestrator.langgraph_workflow import run_demo
 
 
+def sanitize_for_artifact(payload: dict) -> dict:
+    sanitized = dict(payload)
+    for key in ("mcp_workspace_root", "mcp_server_entry"):
+        if key in sanitized:
+            sanitized[key] = "<redacted-local-path>"
+
+    latest_run = sanitized.get("latest_run")
+    if isinstance(latest_run, dict):
+        latest_copy = dict(latest_run)
+        for key in ("mcp_workspace_root", "mcp_server_entry"):
+            if key in latest_copy:
+                latest_copy[key] = "<redacted-local-path>"
+        sanitized["latest_run"] = latest_copy
+
+    return sanitized
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run self-evolving LangGraph workflow")
     parser.add_argument("--task-prompt", default="Implement add(a, b) returning integer sum")
@@ -43,5 +60,6 @@ if __name__ == "__main__":
 
     output_path = PROJECT_ROOT / args.output_json
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    artifact_payload = sanitize_for_artifact(result)
+    output_path.write_text(json.dumps(artifact_payload, indent=2), encoding="utf-8")
     print(f"Saved final state to {output_path}")

@@ -5,6 +5,10 @@
 
 A local-first, self-improving multi-agent engineering runtime that plans, writes, reviews, evaluates, and iteratively improves its own prompts.
 
+## Why I Built This
+I wanted a practical sandbox to experiment with autonomous engineering loops without depending on hosted APIs.
+The project is intentionally local-first, transparent, and easy to inspect so behavior stays debuggable while agents evolve over repeated benchmark runs.
+
 ## Features
 - LangGraph cyclic flow: `Planner -> Coder -> Reviewer -> Meta-Agent`
 - Ollama-first inference with deterministic fallback mode
