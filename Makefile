@@ -1,7 +1,7 @@
 PYTHON ?= python3
 ROOT ?= $(CURDIR)
 
-.PHONY: setup test run benchmark mcp-build mcp-typecheck check release-check final-pack docker-build docker-run docker-run-mcp
+.PHONY: setup test run benchmark mcp-build mcp-typecheck check release-check release-tag final-pack docker-build docker-run docker-run-mcp
 
 setup:
 	cd "$(ROOT)" && $(PYTHON) -m pip install -r requirements.txt
@@ -25,6 +25,10 @@ check: test mcp-typecheck mcp-build
 
 release-check:
 	cd "$(ROOT)" && $(PYTHON) scripts/release_check.py
+
+release-tag:
+	@if [ -z "$(VERSION)" ]; then echo "Usage: make release-tag VERSION=0.1.0"; exit 1; fi
+	cd "$(ROOT)" && $(PYTHON) scripts/tag_release.py --version "$(VERSION)" --push
 
 final-pack:
 	cd "$(ROOT)" && $(PYTHON) scripts/final_pack.py
