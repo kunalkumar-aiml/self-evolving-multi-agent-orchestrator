@@ -97,6 +97,12 @@ docker compose run --rm mcp-server
 - Build release manifest: `python scripts/final_pack.py`
 - Follow `RELEASE_CHECKLIST.md` and `RELEASE_NOTES_TEMPLATE.md`
 
+Tag a release:
+
+```bash
+make release-tag VERSION=0.1.0
+```
+
 ## Collaboration
 - Contribution guide: `CONTRIBUTING.md`
 - Code of conduct: `CODE_OF_CONDUCT.md`
